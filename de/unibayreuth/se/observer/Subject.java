@@ -1,21 +1,28 @@
 package de.unibayreuth.se.observer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Subject {
-    // TODO
+
+    private final List<Observer> observers;
 
     public Subject() {
-        // TODO
+        observers = new ArrayList<>();
     }
 
-    void attach(Observer observer) {
-        // TODO
+    public void attach(Observer observer) {
+        observers.add(observer);
     }
 
-    void detach(Observer observer) {
-        // TODO
+    public void detach(Observer observer) {
+        observers.remove(observer);
     }
-
+public abstract void notifyObservers();
     protected void fireUpdate() {
-        // TODO
+        System.out.println("Sende Update an Beobachter...");
+        for (Observer observer : observers) {
+            observer.update(this);
+        }
     }
 }
